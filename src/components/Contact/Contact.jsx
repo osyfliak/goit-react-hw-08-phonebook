@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { useEffect, useState } from 'react';
 import AddContactForm from './AddContactForm/AddContactForm';
 import ContactList from './ContactList/ContactList';
 import ContactFiltr from './ContactFiltr/ContactFiltr';
@@ -6,49 +6,39 @@ import { Title, Div } from './Style.styled';
 
 const LOCAL_CONTACT_KEY = 'localContactKey';
 
-class Contact extends Component {
-  state = {
-    contactList: [],
-    filter: '',
-  };
+const Contact = () => {
+  const [contactList, setContactList] = useState([]);
+  const [filter, setFilter] = useState('');
 
-  componentDidMount() {
+  useEffect(() => {
     const savedContactList = JSON.parse(
       localStorage.getItem(LOCAL_CONTACT_KEY)
     );
     if (savedContactList) {
-      this.setState({ contactList: savedContactList });
+      setContactList(savedContactList);
     }
-  }
+  }, []);
 
-  componentDidUpdate(_, prevState, snapshot) {
-    if (prevState.contactList.length !== this.state.contactList.length) {
-      localStorage.setItem(
-        LOCAL_CONTACT_KEY,
-        JSON.stringify(this.state.contactList)
-      );
-    }
-  }
+  useEffect(() => {
+    localStorage.setItem(LOCAL_CONTACT_KEY, JSON.stringify(contactList));
+  }, [contactList]);
 
-  handleChangeFilter = e => {
+  const handleChangeFilter = e => {
     const { value } = e.target;
-    this.setState({ filter: value });
+    setFilter(value);
   };
-  handleFilterFilms = e => {
-    const { contactList, filter } = this.state;
-
+  const handleFilterFilms = () => {
     return contactList.filter(item =>
       item.name.toLowerCase().includes(filter.toLowerCase())
     );
   };
-  hanleDeleteContact = id => {
-    this.setState(prevState => ({
-      contactList: prevState.contactList.filter(item => item.id !== id),
-    }));
+  const hanleDeleteContact = id => {
+    setContactList(prev => prev.filter(item => item.id !== id));
   };
-  hanleAddContact = newContact => {
+
+  const hanleAddContact = newContact => {
     if (
-      this.state.contactList.some(
+      contactList.some(
         contact =>
           contact.name.toLowerCase().trim() ===
           newContact.name.toLowerCase().trim()
@@ -56,25 +46,20 @@ class Contact extends Component {
     ) {
       return alert('ERRROR');
     }
-    this.setState(prevState => ({
-      contactList: [...prevState.contactList, newContact],
-    }));
+    setContactList(prev => [...prev, newContact]);
   };
 
-  render() {
-    const { filter } = this.state;
-    return (
-      <Div>
-        <AddContactForm onAddContact={this.hanleAddContact} />
-        <Title>Contacts</Title>
-        <ContactFiltr onChange={this.handleChangeFilter} name={filter} />
-        <ContactList
-          contactList={this.handleFilterFilms()}
-          onDeleteContact={this.hanleDeleteContact}
-        />
-      </Div>
-    );
-  }
-}
+  return (
+    <Div>
+      <AddContactForm onAddContact={hanleAddContact} />
+      <Title>Contacts</Title>
+      <ContactFiltr onChange={handleChangeFilter} name={filter} />
+      <ContactList
+        contactList={handleFilterFilms()}
+        onDeleteContact={hanleDeleteContact}
+      />
+    </Div>
+  );
+};
 
 export default Contact;
