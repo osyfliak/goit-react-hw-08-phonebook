@@ -4,10 +4,14 @@ import ContactList from './ContactList/ContactList';
 import ContactFiltr from './ContactFiltr/ContactFiltr';
 import { Title, Div } from './Style.styled';
 
+import { getLocalData } from 'helpers/getLocalData';
+
 const LOCAL_CONTACT_KEY = 'localContactKey';
 
 const Contact = () => {
-  const [contactList, setContactList] = useState([]);
+  const [contactList, setContactList] = useState(
+    () => getLocalData(LOCAL_CONTACT_KEY) ?? []
+  );
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
