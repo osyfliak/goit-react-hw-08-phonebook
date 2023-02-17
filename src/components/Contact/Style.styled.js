@@ -57,6 +57,6 @@ padding: 80px 50px;
 border-radius: 10px;
 box-shadow: 10px 5px 5px black;
 `
-export const List = styled.li`
+export const List = styled.ul`
 list-style: none;
 text-align: center;`

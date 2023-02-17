@@ -1,13 +1,18 @@
 import { Input, Label } from '../Style.styled';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectFilter } from 'redux/filter/filterSelector';
+import { filterContactsActions } from 'redux/filter/filter-slise';
 
-const ContactFiltr = ({ onChange, name }) => {
+const ContactFiltr = () => {
+  const filterValue = useSelector(selectFilter);
+  const dispatch = useDispatch();
+  
   return (
     <>
       <Label>Find contact by name </Label>
       <Input
-        onChange={onChange}
-        value={name}
+        onChange={e=>dispatch(filterContactsActions(e.target.value))}
+        value={filterValue}
         type="text"
         name="name"
         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -18,8 +23,4 @@ const ContactFiltr = ({ onChange, name }) => {
   );
 };
 
-ContactFiltr.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  name: PropTypes.string.isRequired,
-};
 export default ContactFiltr;
