@@ -24,7 +24,6 @@ const contactSlice = createSlice({
         state.error = alert('error');
       })
 
-      
       .addCase(addContactsThunk.pending, state => {
         state.isLoading = true;
       })
@@ -34,7 +33,6 @@ const contactSlice = createSlice({
       .addCase(addContactsThunk.rejected, state => {
         state.error = alert('error');
       })
-
 
       .addCase(deleteContactsThunk.pending, state => {
         state.isLoading = true;

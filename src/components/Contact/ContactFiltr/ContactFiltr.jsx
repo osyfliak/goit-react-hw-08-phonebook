@@ -6,12 +6,12 @@ import { filterContactsActions } from 'redux/filter/filter-slise';
 const ContactFiltr = () => {
   const filterValue = useSelector(selectFilter);
   const dispatch = useDispatch();
-  
+
   return (
     <>
       <Label>Find contact by name </Label>
       <Input
-        onChange={e=>dispatch(filterContactsActions(e.target.value))}
+        onChange={e => dispatch(filterContactsActions(e.target.value))}
         value={filterValue}
         type="text"
         name="name"

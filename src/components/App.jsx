@@ -2,7 +2,7 @@ import Contact from './Contact/Contact';
 
 export const App = () => {
   return (
-         <div
+    <div
       style={{
         display: 'flex',
         justifyContent: 'center',

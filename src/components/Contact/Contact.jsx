@@ -11,10 +11,10 @@ const Contact = () => {
   const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
   console.log(contacts);
-  useEffect(()=>{
-    dispatch(getContactsThunk())
-  },[dispatch])
-  
+  useEffect(() => {
+    dispatch(getContactsThunk());
+  }, [dispatch]);
+
   return (
     <Div>
       <AddContactForm />

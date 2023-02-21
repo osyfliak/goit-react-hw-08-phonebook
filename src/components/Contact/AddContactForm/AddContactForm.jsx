@@ -34,13 +34,12 @@ const AddContactForm = ({ onAddContact }) => {
     if (
       contactList.some(
         contact =>
-          contact.name.toLowerCase().trim() ===
-          name.toLowerCase().trim()
+          contact.name.toLowerCase().trim() === name.toLowerCase().trim()
       )
     ) {
       return alert('ERRROR');
     }
-    dispatch(addContactsThunk(newContact))
+    dispatch(addContactsThunk(newContact));
     reset();
   };
 

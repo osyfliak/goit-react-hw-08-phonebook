@@ -9,7 +9,7 @@ export const getContacts = async () => {
   return data;
 };
 
-export const addContacts = async (contact) => {
+export const addContacts = async contact => {
   const { data } = await contactService.post('contacts/', contact);
   return data;
 };
