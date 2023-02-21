@@ -3,14 +3,12 @@ import ContactList from './ContactList/ContactList';
 import ContactFiltr from './ContactFiltr/ContactFiltr';
 import { Title, Div } from './Style.styled';
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectContacts } from 'redux/contact/contactsSelector';
+import { useDispatch } from 'react-redux';
 import { getContactsThunk } from 'redux/contact/contacts-thunk';
 
 const Contact = () => {
-  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
-  console.log(contacts);
+
   useEffect(() => {
     dispatch(getContactsThunk());
   }, [dispatch]);
