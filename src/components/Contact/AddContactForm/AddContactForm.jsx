@@ -2,15 +2,15 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { Form, Label, Input, Button, Title } from '../Style.styled';
-import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from 'redux/contact/contactsSelector';
-import { addContactAction } from 'redux/contact/contact-slice';
+
+import { addContactsThunk } from 'redux/contact/contacts-thunk';
 
 const AddContactForm = ({ onAddContact }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const handleChangeForm = e => {
     const { name, value } = e.target;
 
@@ -30,7 +30,7 @@ const dispatch = useDispatch();
 
   const handleSubmitForm = e => {
     e.preventDefault();
-    const newContact = { name, number, id: nanoid(), };
+    const newContact = { name, number };
     if (
       contactList.some(
         contact =>
@@ -40,7 +40,7 @@ const dispatch = useDispatch();
     ) {
       return alert('ERRROR');
     }
-    dispatch(addContactAction(newContact))
+    dispatch(addContactsThunk(newContact))
     reset();
   };
 

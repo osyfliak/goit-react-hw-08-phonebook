@@ -1,11 +1,13 @@
 import { Button, List } from '../Style.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContactAction } from 'redux/contact/contact-slice';
-import { selectFilteredContacts } from 'redux/filter/filterSelector';
 
-const ContactList = () => {
+import { selectFilteredContacts } from 'redux/filter/filterSelector';
+import { deleteContactsThunk, getContactsThunk } from 'redux/contact/contacts-thunk';
+
+
+  const ContactList = () => {
   const dispatch = useDispatch();
-const deleteContact =(id)=> dispatch(deleteContactAction(id));
+  const deleteContact =(id)=> dispatch(deleteContactsThunk(id)).unwrap().then(()=> dispatch(getContactsThunk()));
 
   const contactList = useSelector(selectFilteredContacts);
   return (
