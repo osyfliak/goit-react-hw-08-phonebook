@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { Form, Label, Input, Button, Title } from '../Style.styled';
+import { Form, Label, Input, Button } from '../Style.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from 'redux/contact/contacts-selector';
 
