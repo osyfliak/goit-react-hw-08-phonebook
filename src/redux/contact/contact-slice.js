@@ -31,7 +31,7 @@ const contactSlice = createSlice({
         state.items = [...state.items, payload];
       })
       .addCase(addContactsThunk.rejected, state => {
-        state.error = alert('error');
+ 
       })
 
       .addCase(deleteContactsThunk.pending, state => {

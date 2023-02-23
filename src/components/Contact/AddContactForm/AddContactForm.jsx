@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Form, Label, Input, Button, Title } from '../Style.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectContacts } from 'redux/contact/contactsSelector';
+import { selectContacts } from 'redux/contact/contacts-selector';
 
 import { addContactsThunk } from 'redux/contact/contacts-thunk';
 
@@ -50,7 +50,6 @@ const AddContactForm = ({ onAddContact }) => {
 
   return (
     <>
-      <Title>Phonebook</Title>
       <Form onSubmit={handleSubmitForm}>
         <Label>Name</Label>
         <Input
