@@ -16,7 +16,9 @@ const authSlice = createSlice({
       .addCase(signUpThunk.pending, state => {
         state.isLoading = true;
       })
-      .addCase(signUpThunk.fulfilled, (state) => {
+      .addCase(signUpThunk.fulfilled, (state, { payload }) => {
+        state.user = payload.user;
+        state.token = payload.token;
         state.isLoading = false;
         state.error = null;
       })

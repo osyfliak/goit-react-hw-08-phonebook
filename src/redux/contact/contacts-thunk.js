@@ -3,12 +3,18 @@ import {
   getContacts,
   addContacts,
   deleteContacts,
+  token,
 } from 'services/phonebook-api';
 
 export const getContactsThunk = createAsyncThunk(
   'contacts/fetchAll',
-  async (_, { rejectWithValue }) => {
+  async (е, { rejectWithValue, getState }) => {
     try {
+      const savedToken = getState().auth.token;
+      if (!savedToken) {
+        return rejectWithValue("there is no token");
+      }
+      token.set(savedToken);
       const data = await getContacts();
       return data;
     } catch {
